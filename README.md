@@ -75,10 +75,10 @@ Typical circuit.
 - 24C64   
 ![24c64](https://user-images.githubusercontent.com/6020549/79179721-3bd5d700-7e43-11ea-8425-df9ec47ae52d.jpg)
 
--24C128   
+- 24C128   
 ![24c128](https://user-images.githubusercontent.com/6020549/79179731-4001f480-7e43-11ea-9296-c62ea59c204c.jpg)
 
--24C256   
+- 24C256   
 ![24c256](https://user-images.githubusercontent.com/6020549/79179735-43957b80-7e43-11ea-92cd-a667ad20d3ed.jpg)
 
 
