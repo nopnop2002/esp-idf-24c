@@ -36,6 +36,7 @@ esp_err_t ReadRom(EEPROM_t * dev, uint16_t data_addr, uint8_t * data);
 
 // Write data to EEPROM
 esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
+```
 
 ---
 
@@ -54,6 +55,9 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 
 (*1) I2C Address Inputs. See data sheet.   
 (*2) PullUp required. You can change any GPIO using menuconfig.   
+
+Typical circuit.   
+![ESP32-at24](https://user-images.githubusercontent.com/6020549/79180746-b0117a00-7e45-11ea-8b68-2b19e5a3821f.jpg)
 
 ---
 
