@@ -23,6 +23,14 @@ make flash
 
 ---
 
+# Memory size
+
+|Device|Number of Bits|Number of 8-bit Bytes|
+|:---|:---|:---|
+|24C02|2K|256|
+
+---
+
 # API
 ```
 // Open device
