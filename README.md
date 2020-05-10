@@ -69,7 +69,7 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 |WP|--|GND|
 |VCC|--|3.3V|
 
-(*1) I2C Address Inputs. See data sheet.   
+(*1) I2C Address inputs. When A0 A1 A2 is GND, i2c address is 0x50. See data sheet.   
 (*2) PullUp required. You can change any GPIO using menuconfig.   
 
 Typical circuit.   
