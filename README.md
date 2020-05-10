@@ -25,7 +25,7 @@ make flash
 
 # Memory size
 
-|Device|Number of Bits|Number of 8-bit Bytes|i2c adress|
+|Device|Number of Bits|Number of 8-bit Bytes|i2c address|
 |:---|:---|:---|:---|
 |24C02|2K|256|0x50-0x57|
 |24C04|4K|512|0x50/0x52/0x54/0x56|
