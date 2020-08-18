@@ -74,7 +74,7 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 
 Typical circuit.   
 When A0 A1 A2 is GND, i2c address is 0x50.  
-![ESP32-at24](https://user-images.githubusercontent.com/6020549/79180746-b0117a00-7e45-11ea-8b68-2b19e5a3821f.jpg)
+![ESP32-at24](https://user-images.githubusercontent.com/6020549/90574611-5c98a980-e1f4-11ea-9bd2-9d2cb5272cd4.jpg)
 
 ---
 
