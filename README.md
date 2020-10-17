@@ -1,5 +1,5 @@
 # esp-idf-at24c
-Two-Wire Serial EEPROM Access Driver for esp-idf.   
+Two-Wire Serial EEPROM Driver for esp-idf.   
 
 # Configure
 You have to set this config value with menuconfig.   
