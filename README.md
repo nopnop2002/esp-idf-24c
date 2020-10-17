@@ -42,15 +42,24 @@ make flash
 # API
 ```
 // Open device
+//   size:number of k-bits of EEPROM
+//   i2c_port:I2C_NUM_0/I2C_NUM_1
+//   chip_addr:i2c address
+//   i2c_gpio_sda:SDA GPIO
+//   i2c_gpio_scl:SCL GPIO
 esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, int16_t size, i2c_port_t i2c_port, int chip_addr, int i2c_gpio_sda, int i2c_gpio_scl);
 
 // Get EEPROM maximum address
 uint16_t MaxAddress(EEPROM_t * dev);
 
 // Read data from EEPROM
+//   data_addr:read address
+//   data:read data buffer
 esp_err_t ReadRom(EEPROM_t * dev, uint16_t data_addr, uint8_t * data);
 
 // Write data to EEPROM
+//   data_addr:write address
+//   data:write data buffer
 esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 ```
 
