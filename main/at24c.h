@@ -10,12 +10,12 @@
 typedef struct {
 	uint16_t _i2c_port;
 	uint16_t _chip_addr;
-	uint16_t _bits;
+	uint16_t _size;
 	uint16_t _bytes;
 } EEPROM_t;
 
-esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, uint16_t model, i2c_port_t i2c_port, int chip_addr, int i2c_gpio_sda, int i2c_gpio_scl);
-uint16_t getMaxAddress(EEPROM_t * dev);
+esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, int16_t size, i2c_port_t i2c_port, int chip_addr, int i2c_gpio_sda, int i2c_gpio_scl);
+uint16_t MaxAddress(EEPROM_t * dev);
 //static esp_err_t ReadReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, uint8_t data_addr, uint8_t * data);
 //static esp_err_t WriteReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, uint8_t data_addr, uint8_t data);
 //static esp_err_t ReadReg16(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, uint16_t data_addr, uint8_t * data);

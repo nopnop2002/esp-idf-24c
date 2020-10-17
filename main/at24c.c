@@ -15,12 +15,12 @@ Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 
 #define tag "at24c"
 
-esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, uint16_t bits, i2c_port_t i2c_port, int chip_addr, int i2c_gpio_sda, int i2c_gpio_scl)
+esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, int16_t size, i2c_port_t i2c_port, int chip_addr, int i2c_gpio_sda, int i2c_gpio_scl)
 {
 	dev->_i2c_port = i2c_port;
 	dev->_chip_addr = chip_addr;
-	dev->_bits = bits;
-	dev->_bytes = 128 * bits;
+	dev->_size = size;
+	dev->_bytes = 128 * size;
 
 	esp_err_t ret;
 	i2c_config_t conf = {
@@ -39,7 +39,7 @@ esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, uint16_t bits, i2c_port_t
 	return ret;
 }
 
-uint16_t getMaxAddress(EEPROM_t * dev) {
+uint16_t MaxAddress(EEPROM_t * dev) {
 	return dev->_bytes;
 }
 
@@ -113,7 +113,7 @@ esp_err_t ReadRom(EEPROM_t * dev, uint16_t data_addr, uint8_t * data)
 {
 	if (data_addr > dev->_bytes) return 0;
 
-	if (dev->_bits < 32) {
+	if (dev->_size < 32) {
 		int blockNumber = data_addr / 256;
 		uint16_t _data_addr = data_addr - (blockNumber * 256);
 		int _chip_addr = dev->_chip_addr + blockNumber;
@@ -129,7 +129,7 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data)
 {
 	if (data_addr > dev->_bytes) return 0;
 
-	if (dev->_bits < 32) {
+	if (dev->_size < 32) {
 		int blockNumber = data_addr / 256;
 		uint16_t _data_addr = data_addr - (blockNumber * 256);
 		int _chip_addr = dev->_chip_addr + blockNumber;
