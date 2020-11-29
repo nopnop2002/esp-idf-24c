@@ -1,4 +1,4 @@
-# esp-idf-at24c
+# esp-idf-24c
 Two-Wire Serial EEPROM Driver for esp-idf.   
 
 # Configure
@@ -9,8 +9,8 @@ You have to set this config value with menuconfig.
 - CONFIG_I2C_ADDRESS   
 
 ```
-git clone https://github.com/nopnop2002/esp-idf-at24c
-cd esp-idf-at24c
+git clone https://github.com/nopnop2002/esp-idf-24c
+cd esp-idf-24c
 make menuconfig
 make flash
 ```
@@ -67,7 +67,7 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 
 # Wireing  
 
-|AT24Cxx||ESP32|
+|24Cxx||ESP32|
 |:-:|:-:|:-:|
 |A0|--|GND(*1)|
 |A1|--|GND(*1)|
