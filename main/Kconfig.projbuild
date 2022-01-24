@@ -1,72 +1,84 @@
 menu "EEPROM Configuration"
 
-    choice MODEL
-        prompt "EEPROM MODEL"
-        default 24C02
-        help
-            Select EEPROM Chip Model.
-        config 24C02
-            bool "24C02"
-            help
-                EEPROM is 24C02(2K Bit)
-        config 24C04
-            bool "24C04"
-            help
-                EEPROM is 24C04(4K Bit)
-        config 24C08
-            bool "24C08"
-            help
-                EEPROM is 24C08(8K Bit)
-        config 24C16
-            bool "24C16"
-            help
-                EEPROM is 24C16(16K Bit)
-        config 24C32
-            bool "24C32"
-            help
-                EEPROM is 24C32(32K Bit)
-        config 24C64
-            bool "24C64"
-            help
-                EEPROM is 24C64(64K Bit)
-        config 24C128
-            bool "24C128"
-            help
-                EEPROM is 24C128(128K Bit)
-        config 24C256
-            bool "24C256"
-            help
-                EEPROM is 24C256(256K Bit)
-        config 24C512
-            bool "24C512"
-            help
-                EEPROM is 24C512(512K Bit)
-    endchoice
+	config GPIO_RANGE_MAX
+		int
+		default 33 if IDF_TARGET_ESP32
+		default 46 if IDF_TARGET_ESP32S2
+		default 19 if IDF_TARGET_ESP32C3
+		default 48 if IDF_TARGET_ESP32S3
 
-    config SCL_GPIO
-        int "SCL GPIO number"
-        range 0 34
-        default 22
-        help
-            GPIO number (IOxx) to I2C SCL.
-            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
-            GPIOs 35-39 are input-only so cannot be used as outputs.
+	choice MODEL
+		prompt "EEPROM MODEL"
+		default 24C02
+		help
+			Select EEPROM Chip Model.
+		config 24C02
+			bool "24C02"
+			help
+				EEPROM is 24C02(2K Bit)
+		config 24C04
+			bool "24C04"
+			help
+				EEPROM is 24C04(4K Bit)
+		config 24C08
+			bool "24C08"
+			help
+				EEPROM is 24C08(8K Bit)
+		config 24C16
+			bool "24C16"
+			help
+				EEPROM is 24C16(16K Bit)
+		config 24C32
+			bool "24C32"
+			help
+				EEPROM is 24C32(32K Bit)
+		config 24C64
+			bool "24C64"
+			help
+				EEPROM is 24C64(64K Bit)
+		config 24C128
+			bool "24C128"
+			help
+				EEPROM is 24C128(128K Bit)
+		config 24C256
+			bool "24C256"
+			help
+				EEPROM is 24C256(256K Bit)
+		config 24C512
+			bool "24C512"
+			help
+				EEPROM is 24C512(512K Bit)
+	endchoice
 
-    config SDA_GPIO
-        int "SDA GPIO number"
-        range 0 34
-        default 21
-        help
-            GPIO number (IOxx) to I2C SDA.
-            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
-            GPIOs 35-39 are input-only so cannot be used as outputs.
+	config SCL_GPIO
+		int "SCL GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 22 if IDF_TARGET_ESP32
+		default 20 if IDF_TARGET_ESP32S2
+		default 6 if IDF_TARGET_ESP32C3
+		help
+			GPIO number (IOxx) to I2C SCL.
+			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+			On the ESP32, GPIOs 35-39 are input-only so cannot be used as outputs.
+			On the ESP32-S2, GPIO 46 is input-only so cannot be used as outputs.
 
-    config I2C_ADDRESS
-        hex "i2c address of EEPROM"
-        range 0 0xff
-        default 0x50
-        help
-            i2c address of EEPROM.
+	config SDA_GPIO
+		int "SDA GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 21 if IDF_TARGET_ESP32
+		default 19 if IDF_TARGET_ESP32S2
+		default 5 if IDF_TARGET_ESP32C3
+		help
+			GPIO number (IOxx) to I2C SDA.
+			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+			On the ESP32, GPIOs 35-39 are input-only so cannot be used as outputs.
+			On the ESP32-S2, GPIO 46 is input-only so cannot be used as outputs.
 
+	config I2C_ADDRESS
+		hex "i2c address of EEPROM"
+		range 0 0xff
+		default 0x50
+		help
+			i2c address of EEPROM.
 
 endmenu

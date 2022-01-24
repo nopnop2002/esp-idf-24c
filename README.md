@@ -11,8 +11,8 @@ You have to set this config value with menuconfig.
 ```
 git clone https://github.com/nopnop2002/esp-idf-24c
 cd esp-idf-24c
-make menuconfig
-make flash
+idf.py menuconfig
+idf.py flash
 ```
 
 ![config-1](https://user-images.githubusercontent.com/6020549/79178157-6f166700-7e3f-11ea-9e1a-c8beab040df5.jpg)
@@ -71,16 +71,16 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 
 # Wireing  
 
-|24Cxx||ESP32|
-|:-:|:-:|:-:|
-|A0|--|GND(*1)|
-|A1|--|GND(*1)|
-|A2|--|GND(*1)|
-|GND|--|GND|
-|SDA|--|GPIO21(*2)|
-|SCL|--|GPIO22(*2)|
-|WP|--|GND|
-|VCC|--|3.3V|
+|24Cxx||ESP32|ESP32-S2|ESP32-C3||
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|A0|--|GND|GND|GND|(*1)|
+|A1|--|GND|GND|GND|(*1)|
+|A2|--|GND|GND|GND|(*1)|
+|GND|--|GND|GND|GND||
+|SDA|--|GPIO21|GPIO20|GPIO6|(*2)|
+|SCL|--|GPIO22|GPIO19|GPIO5|(*2)|
+|WP|--|GND|GND|GND||
+|VCC|--|3.3V|3.3V|3.3V||
 
 (*1) I2C Address inputs. See data sheet.   
 (*2) PullUp required. You can change any GPIO using menuconfig.   
