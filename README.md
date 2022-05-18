@@ -1,12 +1,7 @@
 # esp-idf-24c
 Two-Wire Serial EEPROM Driver for esp-idf.   
 
-# Configure
-You have to set this config value with menuconfig.   
-- CONFIG_MODEL   
-- CONFIG_SCL_GPIO   
-- CONFIG_SDA_GPIO   
-- CONFIG_I2C_ADDRESS   
+# Installation   
 
 ```
 git clone https://github.com/nopnop2002/esp-idf-24c
@@ -15,13 +10,19 @@ idf.py menuconfig
 idf.py flash
 ```
 
+
+# Configuration   
+You have to set this config value with menuconfig.   
+- CONFIG_MODEL   
+- CONFIG_SCL_GPIO   
+- CONFIG_SDA_GPIO   
+- CONFIG_I2C_ADDRESS   
+
+
 ![config-1](https://user-images.githubusercontent.com/6020549/79178157-6f166700-7e3f-11ea-9e1a-c8beab040df5.jpg)
-
 ![config-2](https://user-images.githubusercontent.com/6020549/79178160-70e02a80-7e3f-11ea-92c2-1c671a090f7b.jpg)
-
 ![config-3](https://user-images.githubusercontent.com/6020549/79178166-73428480-7e3f-11ea-8266-ceac32c4e09b.jpg)
 
----
 
 # Memory size
 
@@ -41,7 +42,6 @@ idf.py flash
 (*2) Four consecutive i2c entries are used in the library.   
 (*3) Eight consecutive i2c entries are used in the library.   
 
----
 
 # API
 ```
@@ -67,7 +67,6 @@ esp_err_t ReadRom(EEPROM_t * dev, uint16_t data_addr, uint8_t * data);
 esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 ```
 
----
 
 # Wireing  
 
@@ -89,7 +88,6 @@ Typical circuit.
 When A0 A1 A2 is GND, i2c address is 0x50.  
 ![ESP32-at24](https://user-images.githubusercontent.com/6020549/90574611-5c98a980-e1f4-11ea-9bd2-9d2cb5272cd4.jpg)
 
----
 
 # Serial Console   
 
