@@ -48,7 +48,7 @@ You have to set this config value with menuconfig.
 ```
 // Open device
 //   i2c_port:I2C_NUM_0/I2C_NUM_1
-esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, i2c_port_t i2c_port);
+esp_err_t InitRom(EEPROM_t * dev, i2c_port_t i2c_port);
 
 // Get EEPROM maximum address
 uint16_t MaxAddress(EEPROM_t * dev);
