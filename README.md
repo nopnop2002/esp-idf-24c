@@ -47,12 +47,8 @@ You have to set this config value with menuconfig.
 # API
 ```
 // Open device
-//   size:number of k-bits of EEPROM
 //   i2c_port:I2C_NUM_0/I2C_NUM_1
-//   chip_addr:i2c address
-//   i2c_gpio_sda:SDA GPIO
-//   i2c_gpio_scl:SCL GPIO
-esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, int16_t size, i2c_port_t i2c_port, int chip_addr, int i2c_gpio_sda, int i2c_gpio_scl);
+esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, i2c_port_t i2c_port);
 
 // Get EEPROM maximum address
 uint16_t MaxAddress(EEPROM_t * dev);
