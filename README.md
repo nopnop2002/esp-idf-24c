@@ -6,6 +6,7 @@ Two-Wire Serial EEPROM Driver for esp-idf.
 ```
 git clone https://github.com/nopnop2002/esp-idf-24c
 cd esp-idf-24c
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
@@ -34,9 +35,9 @@ You have to set this config value with menuconfig.
 |24C16|16K|0x00-0x7FF|0x50(*3)|
 |24C32|32K|0x00-0xFFF|0x50-0x57|
 |24C64|64K|0x00-0x1FFF|0x50-0x57|
-|24C128|128K|0x00-0x3FFF|0x50-0x57|
-|24C256|256K|0x00-0x7FFF|0x50-0x57|
-|24C512|512K|0x00-0xFFFF|0x50-0x57|
+|24C128|128K|0x00-0x3FFF|0x50-0x53|
+|24C256|256K|0x00-0x7FFF|0x50-0x53|
+|24C512|512K|0x00-0xFFFF|0x50-0x53|
 
 (*1) Two consecutive i2c entries are used in the library.   
 (*2) Four consecutive i2c entries are used in the library.   
@@ -70,14 +71,14 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 
 # Wireing  
 
-|24Cxx||ESP32|ESP32-S2|ESP32-C3||
+|24Cxx||ESP32|ESP32-S2/S3|ESP32-C3||
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |A0|--|GND|GND|GND|(*1)|
 |A1|--|GND|GND|GND|(*1)|
 |A2|--|GND|GND|GND|(*1)|
 |GND|--|GND|GND|GND||
-|SDA|--|GPIO21|GPIO20|GPIO6|(*2)|
-|SCL|--|GPIO22|GPIO19|GPIO5|(*2)|
+|SDA|--|GPIO21|GPIO11|GPIO9|(*2)|
+|SCL|--|GPIO22|GPIO12|GPIO10|(*2)|
 |WP|--|GND|GND|GND||
 |VCC|--|3.3V|3.3V|3.3V||
 

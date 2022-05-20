@@ -1,6 +1,10 @@
 /*
-Driver for reading and writing data to 24Cxx external I2C EEPROMs.
-*/
+ * Copyright (c) 2020 nopnop2002
+ *
+ * Driver for reading and writing data to 24Cxx external I2C EEPROMs.
+ *
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -15,19 +19,60 @@ Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 
 #define tag "at24c"
 
-esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, int16_t size, i2c_port_t i2c_port, int chip_addr, int i2c_gpio_sda, int i2c_gpio_scl)
+#if CONFIG_24C02
+#define EEPROM_SIZE         2
+#endif
+
+#if CONFIG_24C04
+#define EEPROM_SIZE         4
+#endif
+
+#if CONFIG_24C08
+#define EEPROM_SIZE         8
+#endif
+
+#if CONFIG_24C16
+#define EEPROM_SIZE         16
+#endif
+
+#if CONFIG_24C32
+#define EEPROM_SIZE         32
+#endif
+
+#if CONFIG_24C64
+#define EEPROM_SIZE         64
+#endif
+
+#if CONFIG_24C128
+#define EEPROM_SIZE         128
+#endif
+
+#if CONFIG_24C256
+#define EEPROM_SIZE         256
+#endif
+
+#if CONFIG_24C512
+#define EEPROM_SIZE         512
+#endif
+
+esp_err_t InitRom(EEPROM_t * dev, i2c_port_t i2c_port)
 {
+	ESP_LOGI(tag, "EEPROM is 24C%.02d",EEPROM_SIZE);
+    ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
+    ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
+    ESP_LOGI(tag, "CONFIG_I2C_ADDRESS=0x%x",CONFIG_I2C_ADDRESS);
+
 	dev->_i2c_port = i2c_port;
-	dev->_chip_addr = chip_addr;
-	dev->_size = size;
-	dev->_bytes = 128 * size;
+	dev->_chip_addr = CONFIG_I2C_ADDRESS;
+	dev->_kbits = EEPROM_SIZE;
+	dev->_bytes = 128 * EEPROM_SIZE;
 
 	esp_err_t ret;
 	i2c_config_t conf = {
         .mode = I2C_MODE_MASTER,
-        .sda_io_num = i2c_gpio_sda,
+        .sda_io_num = CONFIG_SDA_GPIO,
         .sda_pullup_en = GPIO_PULLUP_ENABLE,
-        .scl_io_num = i2c_gpio_scl,
+        .scl_io_num = CONFIG_SCL_GPIO,
         .scl_pullup_en = GPIO_PULLUP_ENABLE,
         .master.clk_speed = I2C_FREQUENCY
 	};
@@ -38,11 +83,6 @@ esp_err_t i2c_master_driver_initialize(EEPROM_t * dev, int16_t size, i2c_port_t 
 	ESP_LOGD(tag, "i2c_driver_install=%d", ret);
 	return ret;
 }
-
-uint16_t MaxAddress(EEPROM_t * dev) {
-	return dev->_bytes;
-}
-
 
 
 static esp_err_t ReadReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, uint8_t data_addr, uint8_t * data)
@@ -55,7 +95,7 @@ static esp_err_t ReadReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, ui
 	i2c_master_write_byte(cmd, chip_addr << 1 | I2C_MASTER_READ, ACK_CHECK_EN);
 	i2c_master_read_byte(cmd, data, NACK_VAL);
 	i2c_master_stop(cmd);
-	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_RATE_MS);
+	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 	return ret;
 }
@@ -68,7 +108,7 @@ static esp_err_t WriteReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, u
 	i2c_master_write_byte(cmd, data_addr, ACK_CHECK_EN);
 	i2c_master_write_byte(cmd, data, ACK_CHECK_EN);
 	i2c_master_stop(cmd);
-	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_RATE_MS);
+	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 	usleep(1000*2);
 	return ret;
@@ -87,7 +127,7 @@ static esp_err_t ReadReg16(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, u
 	i2c_master_write_byte(cmd, chip_addr << 1 | I2C_MASTER_READ, ACK_CHECK_EN);
 	i2c_master_read_byte(cmd, data, NACK_VAL);
 	i2c_master_stop(cmd);
-	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_RATE_MS);
+	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 	return ret;
 }
@@ -103,7 +143,7 @@ static esp_err_t WriteReg16(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, 
 	i2c_master_write_byte(cmd, low_addr, ACK_CHECK_EN);
 	i2c_master_write_byte(cmd, data, ACK_CHECK_EN);
 	i2c_master_stop(cmd);
-	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_RATE_MS);
+	esp_err_t ret = i2c_master_cmd_begin(i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 	usleep(1000*2);
 	return ret;
@@ -113,7 +153,7 @@ esp_err_t ReadRom(EEPROM_t * dev, uint16_t data_addr, uint8_t * data)
 {
 	if (data_addr > dev->_bytes) return 0;
 
-	if (dev->_size < 32) {
+	if (dev->_kbits < 32) {
 		int blockNumber = data_addr / 256;
 		uint16_t _data_addr = data_addr - (blockNumber * 256);
 		int _chip_addr = dev->_chip_addr + blockNumber;
@@ -129,7 +169,7 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data)
 {
 	if (data_addr > dev->_bytes) return 0;
 
-	if (dev->_size < 32) {
+	if (dev->_kbits < 32) {
 		int blockNumber = data_addr / 256;
 		uint16_t _data_addr = data_addr - (blockNumber * 256);
 		int _chip_addr = dev->_chip_addr + blockNumber;
@@ -140,3 +180,8 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data)
 		return WriteReg16(dev, dev->_i2c_port, _chip_addr, data_addr, data); 
 	}
 }
+
+uint16_t MaxAddress(EEPROM_t * dev) {
+	return dev->_bytes;
+}
+

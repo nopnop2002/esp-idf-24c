@@ -17,43 +17,6 @@ Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 #define CONFIG_SCL_GPIO		22
 #define CONFIG_I2C_ADDRESS	0x50
 #define CONFIG_24C02		1
-//#define CONFIG_24C32		1
-#endif
-
-#if CONFIG_24C02
-#define	EEPROM_SIZE			2
-#endif
-
-#if CONFIG_24C04
-#define	EEPROM_SIZE			4
-#endif
-
-#if CONFIG_24C08
-#define	EEPROM_SIZE			8
-#endif
-
-#if CONFIG_24C16
-#define	EEPROM_SIZE			16
-#endif
-
-#if CONFIG_24C32
-#define	EEPROM_SIZE			32
-#endif
-
-#if CONFIG_24C64
-#define	EEPROM_SIZE			64
-#endif
-
-#if CONFIG_24C128
-#define	EEPROM_SIZE			128
-#endif
-
-#if CONFIG_24C256
-#define	EEPROM_SIZE			256
-#endif
-
-#if CONFIG_24C512
-#define	EEPROM_SIZE			512
 #endif
 
 #define tag "24cxx"
@@ -101,14 +64,9 @@ void dump(char * title, uint8_t *dt, uint32_t n)
 
 void app_main()
 {
-	ESP_LOGI(tag, "EEPROM is 24C%.02d",EEPROM_SIZE);
-	ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
-	ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
-	ESP_LOGI(tag, "CONFIG_I2C_ADDRESS=0x%x",CONFIG_I2C_ADDRESS);
-
 	EEPROM_t dev;
 	i2c_port_t i2c_port = I2C_NUM_0;
-	i2c_master_driver_initialize(&dev, EEPROM_SIZE, i2c_port, CONFIG_I2C_ADDRESS, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO);
+	InitRom(&dev, i2c_port);
 	uint16_t bytes = MaxAddress(&dev);
 
 	esp_err_t ret;
