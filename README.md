@@ -1,6 +1,10 @@
 # esp-idf-24c
 Two-Wire Serial EEPROM Driver for esp-idf.   
 
+# Software requirements   
+esp-idf v4.4 or later.   
+This is because this version supports ESP32-C3.   
+
 # Installation   
 
 ```
