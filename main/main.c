@@ -2,6 +2,7 @@
 Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 */
 #include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 
 #include "freertos/FreeRTOS.h"
@@ -11,13 +12,6 @@ Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 #include "esp_log.h"
 
 #include "at24c.h"
-
-#if 0
-#define CONFIG_SDA_GPIO		21
-#define CONFIG_SCL_GPIO		22
-#define CONFIG_I2C_ADDRESS	0x50
-#define CONFIG_24C02		1
-#endif
 
 #define tag "24cxx"
 
@@ -39,7 +33,7 @@ void dump(char * title, uint8_t *dt, uint32_t n)
 		data = dt[addr];
 		if (clm == 0) {
 			sum =0;
-			printf("%05x: ",addr);
+			printf("%05"PRIx32": ",addr);
 		}
 
 		sum+=data;
