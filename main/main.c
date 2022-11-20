@@ -15,7 +15,7 @@ Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 
 #define tag "24cxx"
 
-void dump(char * title, uint8_t *dt, uint32_t n)
+void dump(char * title, uint8_t *dt, int32_t n)
 {
 	uint16_t clm = 0;
 	uint8_t data;
