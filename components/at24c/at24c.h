@@ -11,7 +11,7 @@ typedef struct {
 	uint16_t _i2c_port;
 	uint16_t _chip_addr;
 	uint16_t _kbits;
-	uint16_t _bytes;
+	uint16_t _address;
 } EEPROM_t;
 
 esp_err_t InitRom(EEPROM_t * dev, i2c_port_t i2c_port);

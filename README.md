@@ -93,21 +93,23 @@ When A0 A1 A2 is GND, i2c address is 0x50.
 # Serial Console   
 
 - 24C04   
-![24c04](https://user-images.githubusercontent.com/6020549/79179697-3082ab80-7e43-11ea-9209-9246f335efde.jpg)
+![24c04](https://user-images.githubusercontent.com/6020549/202889995-937bfd55-f6c7-4c9f-ad44-1d43cd60778a.jpg)
 
 - 24C16   
-![24c16](https://user-images.githubusercontent.com/6020549/79179706-337d9c00-7e43-11ea-8d0f-4722073b7b56.jpg)
+![24c16](https://user-images.githubusercontent.com/6020549/202889996-2363c924-4f9e-4c81-bdd7-72c59f6d3f02.jpg)
 
 - 24C32   
-![24c32](https://user-images.githubusercontent.com/6020549/79179713-37112300-7e43-11ea-93d5-afd1c70b28d3.jpg)
+![24c32](https://user-images.githubusercontent.com/6020549/202890000-16089016-a1ce-48f4-b21c-1604f868329c.jpg)
 
 - 24C64   
-![24c64](https://user-images.githubusercontent.com/6020549/79179721-3bd5d700-7e43-11ea-8425-df9ec47ae52d.jpg)
+![24c64](https://user-images.githubusercontent.com/6020549/202890002-b9f3723d-3e51-4b91-9c28-50cedfc5072f.jpg)
 
 - 24C128   
-![24c128](https://user-images.githubusercontent.com/6020549/79179731-4001f480-7e43-11ea-9296-c62ea59c204c.jpg)
+![24c128](https://user-images.githubusercontent.com/6020549/202890003-40b67add-18ae-424f-84e2-a0c083e33550.jpg)
 
 - 24C256   
-![24c256](https://user-images.githubusercontent.com/6020549/79179735-43957b80-7e43-11ea-92cd-a667ad20d3ed.jpg)
+![24c256](https://user-images.githubusercontent.com/6020549/202890004-51accadc-c4f0-4d1c-9260-b84bb1449bba.jpg)
 
+- 24C512
+![24c512](https://user-images.githubusercontent.com/6020549/202890005-1c7b9ac6-fcdb-4063-9350-150e9dfa9b8e.jpg)
 
