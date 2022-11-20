@@ -110,6 +110,6 @@ When A0 A1 A2 is GND, i2c address is 0x50.
 - 24C256   
 ![24c256](https://user-images.githubusercontent.com/6020549/202890004-51accadc-c4f0-4d1c-9260-b84bb1449bba.jpg)
 
-- 24C512
+- 24C512   
 ![24c512](https://user-images.githubusercontent.com/6020549/202890005-1c7b9ac6-fcdb-4063-9350-150e9dfa9b8e.jpg)
 
