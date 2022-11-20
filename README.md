@@ -77,8 +77,8 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 |A1|--|GND|GND|GND|(*1)|
 |A2|--|GND|GND|GND|(*1)|
 |GND|--|GND|GND|GND||
-|SDA|--|GPIO21|GPIO11|GPIO9|(*2)|
-|SCL|--|GPIO22|GPIO12|GPIO10|(*2)|
+|SDA|--|GPIO21|GPIO11|GPIO5|(*2)|
+|SCL|--|GPIO22|GPIO12|GPIO6|(*2)|
 |WP|--|GND|GND|GND||
 |VCC|--|3.3V|3.3V|3.3V||
 
