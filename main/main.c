@@ -15,7 +15,7 @@ Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 
 #define tag "24cxx"
 
-void dump(char * title, uint8_t *dt, int32_t n)
+void dump(char * title, uint8_t *dt, int n)
 {
 	uint16_t clm = 0;
 	uint8_t data;
@@ -55,7 +55,6 @@ void dump(char * title, uint8_t *dt, int32_t n)
 	printf("|%02x \n\n",total);
 }
 
-
 void app_main()
 {
 	EEPROM_t dev;
@@ -67,50 +66,48 @@ void app_main()
 	uint8_t buffer[256];
 	char title[32];
 	
-	// write first block
+	// clear first block
 	for (int i=0; i<256; i++) {
 		uint16_t data_addr = i;
-		uint8_t data = i;
+		uint8_t data = 0;
 		ret = WriteRom(&dev, data_addr, data);
 		if (ret != ESP_OK) {
-			ESP_LOGI(tag, "WriteRom[%d] fail %d", data_addr, ret);
+			ESP_LOGE(tag, "WriteRom[%d] fail %d", data_addr, ret);
 			while(1) { vTaskDelay(1); }
 		}
 	}
 
-	// write last block
-	int offset = bytes - 256;
-	for (int i=0; i<256; i++) {
-		uint16_t data_addr = i + offset;
-		uint8_t data = 255 - i;
-		ret = WriteRom(&dev, data_addr, data);
-		if (ret != ESP_OK) {
-			ESP_LOGI(tag, "WriteRom[%d] fail %d", data_addr, ret);
-			while(1) { vTaskDelay(1); }
-		}
-	}
-
-#if 0
 	// read first block
 	for (int i=0; i<256; i++) {
 		uint16_t data_addr = i;
 		ret = ReadRom(&dev, data_addr, &buffer[i]);
 		if (ret != ESP_OK) {
-			ESP_LOGI(tag, "ReadRom fail %d", ret);
+			ESP_LOGE(tag, "ReadRom fail %d", ret);
 			while(1) { vTaskDelay(1); }
 		}
 	}
 	sprintf(title, "address 0-255");
 	dump(title, buffer, 256);
 	vTaskDelay(100);
-#endif
+
+	// clear last block
+	int offset = bytes - 256;
+	for (int i=0; i<256; i++) {
+		uint16_t data_addr = i + offset;
+		uint8_t data = 0;
+		ret = WriteRom(&dev, data_addr, data);
+		if (ret != ESP_OK) {
+			ESP_LOGE(tag, "WriteRom[%d] fail %d", data_addr, ret);
+			while(1) { vTaskDelay(1); }
+		}
+	}
 
 	// read last block
 	for (int i=0; i<256; i++) {
 		uint16_t data_addr = i + offset;
 		ret = ReadRom(&dev, data_addr, &buffer[i]);
 		if (ret != ESP_OK) {
-			ESP_LOGI(tag, "ReadRom fail %d", ret);
+			ESP_LOGE(tag, "ReadRom fail %d", ret);
 			while(1) { vTaskDelay(1); }
 		}
 	}
@@ -118,12 +115,37 @@ void app_main()
 	dump(title, buffer, 256);
 	vTaskDelay(100);
 
+
+	// write first block
+	for (int i=0; i<256; i++) {
+		uint16_t data_addr = i;
+		uint8_t data = i;
+		ret = WriteRom(&dev, data_addr, data);
+		if (ret != ESP_OK) {
+			ESP_LOGE(tag, "WriteRom[%d] fail %d", data_addr, ret);
+			while(1) { vTaskDelay(1); }
+		}
+	}
+
+
+	// write last block
+	//int offset = bytes - 256;
+	for (int i=0; i<256; i++) {
+		uint16_t data_addr = i + offset;
+		uint8_t data = 255 - i;
+		ret = WriteRom(&dev, data_addr, data);
+		if (ret != ESP_OK) {
+			ESP_LOGE(tag, "WriteRom[%d] fail %d", data_addr, ret);
+			while(1) { vTaskDelay(1); }
+		}
+	}
+
 	// read first block
 	for (int i=0; i<256; i++) {
 		uint16_t data_addr = i;
 		ret = ReadRom(&dev, data_addr, &buffer[i]);
 		if (ret != ESP_OK) {
-			ESP_LOGI(tag, "ReadRom fail %d", ret);
+			ESP_LOGE(tag, "ReadRom fail %d", ret);
 			while(1) { vTaskDelay(1); }
 		}
 	}
@@ -131,4 +153,16 @@ void app_main()
 	dump(title, buffer, 256);
 	vTaskDelay(100);
 
+	// read last block
+	for (int i=0; i<256; i++) {
+		uint16_t data_addr = i + offset;
+		ret = ReadRom(&dev, data_addr, &buffer[i]);
+		if (ret != ESP_OK) {
+			ESP_LOGE(tag, "ReadRom fail %d", ret);
+			while(1) { vTaskDelay(1); }
+		}
+	}
+	sprintf(title, "address %d-%d", offset, offset+255);
+	dump(title, buffer, 256);
+	vTaskDelay(100);
 }
