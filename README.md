@@ -83,12 +83,11 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 |VCC|--|3.3V|3.3V|3.3V||
 
 (*1) I2C Address selection. See data sheet.   
-(*2) PullUp required. You can change any GPIO using menuconfig.   
+(*2) You can change any GPIO using menuconfig.   
 
 Typical circuit.   
 When A0 A1 A2 is GND, i2c address is 0x50.  
-![ESP32-at24](https://user-images.githubusercontent.com/6020549/90574611-5c98a980-e1f4-11ea-9bd2-9d2cb5272cd4.jpg)
-
+![ESP32-at24](https://user-images.githubusercontent.com/6020549/203323623-46874bef-55e8-4b45-9d64-e1f55d6b7281.jpg)
 
 # Serial Console   
 
