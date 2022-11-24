@@ -71,7 +71,7 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 
 # Wireing  
 
-|24Cxx||ESP32|ESP32-S2/S3|ESP32-C3||
+|24Cxx||ESP32|ESP32-S2/S3|ESP32-C2/C3||
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |A0|--|GND|GND|GND|(*1)|
 |A1|--|GND|GND|GND|(*1)|
