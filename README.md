@@ -2,15 +2,16 @@
 Two-Wire Serial EEPROM Driver for esp-idf.   
 
 # Software requirements   
-ESP-IDF V4.4/V5.0.   
+ESP-IDF V4.4/V5.x.   
 ESP-IDF V5.0 is required when using ESP32-C2.   
+ESP-IDF V5.1 is required when using ESP32-C6.   
 
 # Installation   
 
 ```
 git clone https://github.com/nopnop2002/esp-idf-24c
 cd esp-idf-24c
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
 idf.py menuconfig
 idf.py flash
 ```
@@ -71,14 +72,14 @@ esp_err_t WriteRom(EEPROM_t * dev, uint16_t data_addr, uint8_t data);
 
 # Wireing  
 
-|24Cxx||ESP32|ESP32-S2/S3|ESP32-C2/C3||
+|24Cxx||ESP32|ESP32-S2/S3|ESP32-C2/C3/C6||
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |A0|--|GND|GND|GND|(*1)|
 |A1|--|GND|GND|GND|(*1)|
 |A2|--|GND|GND|GND|(*1)|
 |GND|--|GND|GND|GND||
-|SDA|--|GPIO21|GPIO11|GPIO5|(*2)|
-|SCL|--|GPIO22|GPIO12|GPIO6|(*2)|
+|SDA|--|GPIO21|GPIO11|GPIO4|(*2)|
+|SCL|--|GPIO22|GPIO12|GPIO5|(*2)|
 |WP|--|GND|GND|GND||
 |VCC|--|3.3V|3.3V|3.3V||
 

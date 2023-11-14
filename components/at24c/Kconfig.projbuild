@@ -7,6 +7,7 @@ menu "EEPROM Configuration"
 		default 48 if IDF_TARGET_ESP32S3
 		default 18 if IDF_TARGET_ESP32C2
 		default 19 if IDF_TARGET_ESP32C3
+		default 30 if IDF_TARGET_ESP32C6
 
 	choice MODEL
 		prompt "EEPROM MODEL"
@@ -56,7 +57,7 @@ menu "EEPROM Configuration"
 		range 0 GPIO_RANGE_MAX
 		default 22 if IDF_TARGET_ESP32
 		default 12 if IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
-		default  6 if IDF_TARGET_ESP32C3 || IDF_TARGET_ESP32C2
+		default  5 # C3 and others
 		help
 			GPIO number (IOxx) to I2C SCL.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
@@ -68,7 +69,7 @@ menu "EEPROM Configuration"
 		range 0 GPIO_RANGE_MAX
 		default 21 if IDF_TARGET_ESP32
 		default 11 if IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
-		default  5 if IDF_TARGET_ESP32C3 || IDF_TARGET_ESP32C2
+		default  4 # C3 and others
 		help
 			GPIO number (IOxx) to I2C SDA.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
