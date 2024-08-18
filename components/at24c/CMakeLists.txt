@@ -1,5 +1,7 @@
-set(component_srcs "at24c.c")
+if(idf_version VERSION_GREATER_EQUAL "5.2")
+	set(component_srcs "at24c_new.c")
+else()
+	set(component_srcs "at24c_legacy.c")
+endif()
 
-idf_component_register(SRCS "${component_srcs}"
-                       PRIV_REQUIRES driver
-                       INCLUDE_DIRS ".")
+idf_component_register(SRCS "${component_srcs}" PRIV_REQUIRES driver INCLUDE_DIRS ".")
