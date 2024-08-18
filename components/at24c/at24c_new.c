@@ -59,6 +59,7 @@ i2c_master_dev_handle_t dev_handle;
 
 esp_err_t InitRom(EEPROM_t * dev, i2c_port_t i2c_port)
 {
+	ESP_LOGI(TAG, "Using new driver");
 	ESP_LOGI(TAG, "EEPROM is 24C%.02d",EEPROM_SIZE);
 	ESP_LOGI(TAG, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
 	ESP_LOGI(TAG, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
@@ -98,7 +99,7 @@ static esp_err_t ReadReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, ui
 	uint8_t out_buf[1];
 	int out_index = 0;
 	out_buf[out_index++] = data_addr;
-	esp_err_t ret = i2c_master_transmit_receive(dev_handle, out_buf, sizeof(out_buf), data, 1, I2C_TICKS_TO_WAIT));
+	esp_err_t ret = i2c_master_transmit_receive(dev_handle, out_buf, sizeof(out_buf), data, 1, I2C_TICKS_TO_WAIT);
 	return ret;
 }
 
@@ -121,7 +122,7 @@ static esp_err_t ReadReg16(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, u
 	uint8_t low_addr = data_addr & 0xff;
 	out_buf[out_index++] = high_addr;
 	out_buf[out_index++] = low_addr;
-	esp_err_t ret = i2c_master_transmit_receive(dev_handle, out_buf, sizeof(out_buf), data, 1, I2C_TICKS_TO_WAIT));
+	esp_err_t ret = i2c_master_transmit_receive(dev_handle, out_buf, sizeof(out_buf), data, 1, I2C_TICKS_TO_WAIT);
 	return ret;
 }
 
@@ -129,6 +130,8 @@ static esp_err_t WriteReg16(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, 
 {
 	uint8_t out_buf[3];
 	int out_index = 0;
+	uint8_t high_addr = (data_addr >> 8) & 0xff;
+	uint8_t low_addr = data_addr & 0xff;
 	out_buf[out_index++] = high_addr;
 	out_buf[out_index++] = low_addr;
 	out_buf[out_index++] = data;

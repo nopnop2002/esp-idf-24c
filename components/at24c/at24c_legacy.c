@@ -57,6 +57,7 @@
 
 esp_err_t InitRom(EEPROM_t * dev, i2c_port_t i2c_port)
 {
+	ESP_LOGI(TAG, "Using legacy driver");
 	ESP_LOGI(TAG, "EEPROM is 24C%.02d",EEPROM_SIZE);
 	ESP_LOGI(TAG, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
 	ESP_LOGI(TAG, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
