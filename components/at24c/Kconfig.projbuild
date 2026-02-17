@@ -78,7 +78,7 @@ menu "EEPROM Configuration"
 
 	config I2C_ADDRESS
 		hex "i2c address of EEPROM"
-		range 0 0xff
+		range 0x50 0x57
 		default 0x50
 		help
 			i2c address of EEPROM.

@@ -96,20 +96,26 @@ esp_err_t InitRom(EEPROM_t * dev, i2c_port_t i2c_port)
 
 static esp_err_t ReadReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, uint8_t data_addr, uint8_t * data)
 {
+	esp_err_t ret = i2c_master_device_change_address(dev_handle, chip_addr, I2C_TICKS_TO_WAIT);
+	if (ret != ESP_OK) return ret;
+
 	uint8_t out_buf[1];
 	int out_index = 0;
 	out_buf[out_index++] = data_addr;
-	esp_err_t ret = i2c_master_transmit_receive(dev_handle, out_buf, sizeof(out_buf), data, 1, I2C_TICKS_TO_WAIT);
+	ret = i2c_master_transmit_receive(dev_handle, out_buf, sizeof(out_buf), data, 1, I2C_TICKS_TO_WAIT);
 	return ret;
 }
 
 static esp_err_t WriteReg8(EEPROM_t * dev, i2c_port_t i2c_port, int chip_addr, uint8_t data_addr, uint8_t data)
 {
+	esp_err_t ret = i2c_master_device_change_address(dev_handle, chip_addr, I2C_TICKS_TO_WAIT);
+	if (ret != ESP_OK) return ret;
+
 	uint8_t out_buf[2];
 	int out_index = 0;
 	out_buf[out_index++] = data_addr;
 	out_buf[out_index++] = data;
-	esp_err_t ret = i2c_master_transmit(dev_handle, out_buf, 2, I2C_TICKS_TO_WAIT);
+	ret = i2c_master_transmit(dev_handle, out_buf, 2, I2C_TICKS_TO_WAIT);
 	usleep(1000*2);
 	return ret;
 }
