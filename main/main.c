@@ -8,7 +8,11 @@ Driver for reading and writing data to 24Cxx external I2C EEPROMs.
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0))
+#include "driver/i2c_master.h"
+#else
 #include "driver/i2c.h"
+#endif
 #include "esp_log.h"
 
 #include "at24c.h"
