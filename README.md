@@ -2,9 +2,8 @@
 Two-Wire Serial EEPROM Driver for esp-idf.   
 
 # Software requirements   
-ESP-IDF V4.4/V5.x.   
-ESP-IDF V5.0 is required when using ESP32-C2.   
-ESP-IDF V5.1 is required when using ESP32-C6.   
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
 
 __Note for ESP-IDF V5.2.__   
 A new i2c driver is now available in ESP-IDF V5.2.   
